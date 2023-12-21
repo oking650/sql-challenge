@@ -7,17 +7,17 @@ CREATE TABLE departments (
 
 CREATE TABLE titles (
     emp_title_id VARCHAR(5) PRIMARY KEY NOT NULL,
-    title_name VARCHAR(50) NOT NULL
+    title_name VARCHAR(50)
 );
 
 
 CREATE TABLE salaries (
-    emp_no INT PRIMARY KEY,
+    emp_no INT PRIMARY KEY NOT NULL,
     salary INT
 );
 
 CREATE TABLE dept_emp (
-    emp_no INT,
+    emp_no INT NOT NULL,
     dept_no VARCHAR(4),
     PRIMARY KEY (emp_no, dept_no),
     FOREIGN KEY (emp_no) REFERENCES salaries(emp_no),
@@ -25,8 +25,8 @@ CREATE TABLE dept_emp (
 );
 
 CREATE TABLE dept_manager (
+	dept_no VARCHAR(4) NOT NULL,
     emp_no INT,
-    dept_no VARCHAR(4),
     PRIMARY KEY (emp_no, dept_no),
     FOREIGN KEY (emp_no) REFERENCES salaries(emp_no),
     FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
@@ -42,10 +42,3 @@ CREATE TABLE employees (
     hire_date DATE,
     FOREIGN KEY (emp_title_id) REFERENCES titles(emp_title_id)
 );
-
-/Users/oliverking/Repos/sql-challenge/data/employees.csv
-
-COPY departments(dept_no, dept_name) FROM '/path/to/departments.csv' DELIMITER ',' CSV HEADER;
-
-
-
